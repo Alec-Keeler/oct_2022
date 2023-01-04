@@ -1,6 +1,12 @@
 const express = require('express');
 
 const router = express.Router();
+
+router.use((req, res, next) => {
+  console.log('personal data')
+  next()
+})
+
 // /people/
 router.get("/", (req, res) => { // /people /people/
   res.json("Number 1");

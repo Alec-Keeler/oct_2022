@@ -5,4 +5,8 @@ router.get('/', (req, res) => {
     res.json('GET /colors')
 })
 
+router.get('/:name', (req, res) => {
+    res.send(`GET /colors/${req.params.name}`)
+})
+
 module.exports = router;
