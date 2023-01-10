@@ -27,7 +27,7 @@ VALUES
 (4, 11, 103),
 (5, 10, 100),
 (5, 10, 101),
-(5, 11, 102);
+(5, 11, 102),
 (5, 11, 103);
 
 CREATE INDEX idx_things_col_a_col_b_col_c ON things (col_a, col_b, col_c);
@@ -35,8 +35,8 @@ CREATE INDEX idx_things_col_a_col_b_col_c ON things (col_a, col_b, col_c);
 SELECT "query plan - ";
 EXPLAIN QUERY PLAN
 SELECT * FROM things
-WHERE col_a = 1 AND col_b = 10 AND col_c = 100;
+WHERE col_b = 10 AND col_a = 1 AND col_c = 100;
 
 SELECT "query result - ";
 SELECT * FROM things
-WHERE col_a = 1 AND col_b = 10 AND col_c = 100;
+WHERE col_b = 10 AND col_a = 1 AND col_c = 100;

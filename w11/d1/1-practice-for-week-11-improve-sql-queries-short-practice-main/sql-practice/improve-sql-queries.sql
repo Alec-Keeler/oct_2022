@@ -6,7 +6,29 @@
     -- Your code here
 
 -- Paste your results below (as a comment):
+-- CREATE TABLE cat_toys (
+--   id INTEGER PRIMARY KEY AUTOINCREMENT,
+--   cat_id INTEGER NOT NULL,
+--   toy_id INTEGER NOT NULL,
+--   FOREIGN KEY (cat_id) REFERENCES cats(id),
+--   FOREIGN KEY (toy_id) REFERENCES toys(id)
+-- );
+-- CREATE TABLE toys (
+--   id INTEGER PRIMARY KEY AUTOINCREMENT,
+--   name VARCHAR(255) NOT NULL,
+--   color VARCHAR(255) NOT NULL,
+--   price INTEGER NOT NULL
+-- );
+-- CREATE TABLE cats (
+--   id INTEGER PRIMARY KEY AUTOINCREMENT,
+--   name VARCHAR(255) NOT NULL,
+--   color VARCHAR(255) NOT NULL,
+--   breed VARCHAR(255) NOT NULL
+-- );
 
+SELECT * FROM cats
+JOIN cat_toys ON (cat_id = cats.id)
+WHERE toy_id = 5;
 
 
 
@@ -16,9 +38,14 @@
 -- Query:
 
     -- Your code here
+    EXPLAIN QUERY PLAN
+    SELECT * FROM cats
+    JOIN cat_toys ON (cat_toys.cat_id = cats.id)
+    WHERE toy_id = 5;
+
 
 -- Paste your results below (as a comment):
-
+-- Run Time: real 0.003 
 
 -- What do your results mean?
 
@@ -49,6 +76,8 @@
 -- Create index:
 
     -- Your code here
+
+    CREATE INDEX idx_cat_toys_toy_id ON cat_toys (toy_id);
 
 -- Analyze Query:
     -- Your code here
