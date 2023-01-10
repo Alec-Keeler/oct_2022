@@ -17,10 +17,7 @@ module.exports = {
       phone: {
         type: Sequelize.INTEGER
       },
-      firstName: {
-        type: Sequelize.INTEGER
-      },
-      lastName: {
+      name: {
         type: Sequelize.INTEGER
       }
     })

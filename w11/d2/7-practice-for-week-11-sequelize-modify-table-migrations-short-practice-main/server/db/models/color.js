@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Color.init({
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     }
   }, {
     sequelize,
@@ -24,3 +25,5 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Color;
 };
+
+// Color.findAll() //SELECT * FROM Colors
