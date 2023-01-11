@@ -16,7 +16,14 @@ module.exports = (sequelize, DataTypes) => {
       // SELECT * FROM Musicians JOIN Bands ON (Musicians.bandId = Bands.id)
       // Musician.findAll()
 
-      
+      Musician.belongsToMany(models.Instrument, {
+        through: 'MusicianInstrument',
+        foreignKey: 'musicianId',
+        otherKey: 'instrumentId'
+      })
+      // FROM Musicians
+      // JOIN MusicianInstrument ON (Musicians.id = MusicianInstrument.musicianId)
+      // JOIN Instruments ON (MusicianInstrument.instrumentId = Instruments.id)
     }
   };
   Musician.init({

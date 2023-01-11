@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
           onDelete: 'CASCADE', 
           hooks: true
       });
+      Band.hasMany(models.Album, {foreignkey: 'bandId', onDelete: 'CASCADE', hooks: true})
     }
   };
   Band.init({

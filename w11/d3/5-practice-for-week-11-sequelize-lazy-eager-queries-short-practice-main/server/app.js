@@ -6,7 +6,7 @@ const app = express();
 require('dotenv').config();
 
 // Import the models used in these routes - DO NOT MODIFY
-const { Band, Musician } = require('./db/models');
+const { Band, Musician, Instrument, Album } = require('./db/models');
 
 // Express using json - DO NOT MODIFY
 app.use(express.json());
@@ -41,12 +41,16 @@ app.get('/bands-lazy', async (req, res, next) => {
     for(let i = 0; i < allBands.length; i++){
         const band = allBands[i];
         // Your code here
+        const musicians = await band.getMusicians({ // user.getPosts, post.getUser
+            order: [['firstName', 'ASC']]
+        })
         const bandData = {
             id: band.id,
             name: band.name,
             createdAt: band.createdAt,
             updatedAt: band.updatedAt,
             // Your code here
+            Musicians: musicians
         };
         payload.push(bandData);
     }
@@ -57,9 +61,57 @@ app.get('/bands-lazy', async (req, res, next) => {
 app.get('/bands-eager', async (req, res, next) => {
     const payload = await Band.findAll({
         // Your code here
+        // include: { model: Musician },
+        include: Musician,
+        // include: [Musician],
+        // include: [{model: Musician}],
+        order: [[Musician, 'firstName', 'DESC']]
     });
     res.json(payload);
 });
+
+app.get('/bands-test', async (req, res, next) => {
+    // const data = await Band.findAll({
+    //     include: {
+    //         model: Musician,
+    //         include: {model: Instrument, where: {type: 'piano'}}
+    //     }
+    // })
+    // const data = await Musician.findAll({
+    //     include: [Instrument, {
+    //         model: Band,
+    //         include: Album
+    //     }]
+    // })
+    const data = await Album.findAll({ 
+        include: {
+            model: Band,
+            attributes: ['id'],
+            include: {
+                model: Musician,
+                include: {
+                    model: Instrument,
+                    through: {
+                        attributes: []
+                    }
+                }
+            }
+        },
+        // attributes: []
+        // attributes related to Album
+    })
+    res.json(data)
+})
+
+// FROM Bands
+// JOIN Musicians ...
+// JOIN MusicianInstruments ...
+// JOIN Instruments ...
+
+// FROM Musicians
+// JOIN Bands ...
+// JOIN MusicianInstruments ....
+// JOIN Instruments
 
 // Root route - DO NOT MODIFY
 app.get('/', (req, res) => {
