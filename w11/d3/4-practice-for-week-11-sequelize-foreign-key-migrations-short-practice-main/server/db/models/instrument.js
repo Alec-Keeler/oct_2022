@@ -11,6 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // Your code here
+      Instrument.belongsToMany(models.Musician, {
+        through: 'MusicianInstrument',
+        foreignKey: 'instrumentId',
+        otherKey: 'musicianId'
+      })
+      // FROM Instruments
+      // JOIN MusicianInstruments ON (Instruments.id = MusicianInstruments.instrumentId)
+      // JOIN Musicians ON (MusicianInstruments.musicianId = Musicians.id)
     }
   };
   Instrument.init({

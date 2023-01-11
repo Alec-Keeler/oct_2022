@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // Your code here
+      Musician.belongsTo(models.Band, {foreignKey: 'bandId'})
+
+      // SELECT * FROM Musicians JOIN Bands ON (Musicians.bandId = Bands.id)
+      // Musician.findAll()
+
+      
     }
   };
   Musician.init({

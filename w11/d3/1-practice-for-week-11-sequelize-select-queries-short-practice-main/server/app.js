@@ -15,6 +15,8 @@ const { Op } = require("sequelize");
 app.use(express.json());
 
 
+// findAll, findOne, findByPk
+
 // STEP 1
 // All puppies in the database
 // No WHERE clause
@@ -22,6 +24,10 @@ app.get('/puppies', async (req, res, next) => {
     let allPuppies;
 
     // Your code here
+
+    allPuppies = await Puppy.findAll({
+        order: [['name', 'ASC']]
+    })
 
     res.json(allPuppies);
 });
@@ -35,6 +41,14 @@ app.get('/puppies/chipped', async (req, res, next) => {
 
     // Your code here
 
+    chippedPuppies = await Puppy.findAll({
+        where: {
+            microchipped: true
+        },
+        order: [['age_yrs', 'DESC'], ['name', 'ASC']],
+        attributes: ['name', 'age_yrs', 'weight_lbs', 'microchipped', 'breed']
+    })
+    // SELECT * FROM Puppies WHERE microchipped = true
     res.json(chippedPuppies);
 });
 
@@ -47,9 +61,27 @@ app.get('/puppies/name/:name', async (req, res, next) => {
     
     // Your code here
 
+    puppyByName = await Puppy.findOne({
+        where: {
+            name: req.params.name
+        }
+    })
+
     res.json(puppyByName);
 })
 
+// STEP 4
+// One puppy matching an id param
+// Finding one record by primary key
+app.get('/puppies/:id(\\d+)', async (req, res, next) => {
+    let puppyById;
+
+    // Your code here
+
+    puppyById = await Puppy.findByPk(req.params.id)
+
+    res.json(puppyById);
+});
 
 // BONUS STEP 5
 // All puppies with breed ending in 'Shepherd'
@@ -58,6 +90,13 @@ app.get('/puppies/shepherds', async (req, res, next) => {
     let shepherds;
     
     // Your code here
+    shepherds = await Puppy.findAll({
+        where: {
+            breed: {
+                [Op.endsWith]: 'Shepherd'
+            }
+        }
+    })
 
     res.json(shepherds);
 })
@@ -70,21 +109,23 @@ app.get('/puppies/tinybabies', async (req, res, next) => {
     let tinyBabyPuppies;
     
     // Your code here
+    tinyBabyPuppies = await Puppy.findAll({
+        where: {
+            age_yrs: {
+                [Op.lte]: 1
+            },
+            weight_lbs: {
+                [Op.lte]: 20
+            }
+        },
+        order: [['age_yrs'], ['weight_lbs', 'ASC']]
+    })
 
     res.json(tinyBabyPuppies);
 })
 
 
-// STEP 4
-// One puppy matching an id param
-// Finding one record by primary key
-app.get('/puppies/:id', async (req, res, next) => {
-    let puppyById;
-    
-    // Your code here
-    
-    res.json(puppyById);
-});
+
 
 
 // Root route - DO NOT MODIFY
