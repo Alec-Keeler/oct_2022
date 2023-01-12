@@ -1,26 +1,24 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Musicians', {
+    await queryInterface.createTable('Cats', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      groupId: {
-        type: Sequelize.INTEGER,
+      name: {
         allowNull: false,
-        references: { model: 'Bands' },
-        onDelete: 'CASCADE'
+        type: Sequelize.STRING
+      },
+      color: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      breed: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +33,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Musicians');
+    await queryInterface.dropTable('Cats');
   }
 };

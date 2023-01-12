@@ -11,6 +11,16 @@ const { Band, Musician, Instrument, Album } = require('./db/models');
 // Express using json - DO NOT MODIFY
 app.use(express.json());
 
+app.get('/test', async(req, res) => {
+    const data = await Band.findOne({
+        where: {
+            id: 1
+        },
+        include: Musician
+    })
+    res.send('success?')
+})
+
 // STEP 1: Example of lazy loading
 app.get('/bands-lazy/:id', async (req, res, next) => {
     const band = await Band.findByPk(req.params.id);

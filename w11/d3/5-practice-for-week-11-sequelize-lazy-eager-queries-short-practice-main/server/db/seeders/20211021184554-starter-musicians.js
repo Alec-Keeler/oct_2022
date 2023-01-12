@@ -43,14 +43,66 @@ const bandMusicians = [
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    for(let bandIdx = 0; bandIdx < bandMusicians.length; bandIdx++){
-      const { name, musicians } = bandMusicians[bandIdx];
-      const band = await Band.findOne({ where: { name } });
-      for(let musicianIdx = 0; musicianIdx < musicians.length; musicianIdx++) {
-        const musician = musicians[musicianIdx];
-        await band.createMusician(musician);
-      }
-    }
+    // for(let bandIdx = 0; bandIdx < bandMusicians.length; bandIdx++){
+    //   const { name, musicians } = bandMusicians[bandIdx];
+    //   const band = await Band.findOne({ where: { name } });
+    //   for(let musicianIdx = 0; musicianIdx < musicians.length; musicianIdx++) {
+    //     const musician = musicians[musicianIdx];
+    //     await band.createMusician(musician);
+    //   }
+    // }
+    await queryInterface.bulkInsert('Musicians', [
+      {
+        groupId: 1,
+        firstName: 'Adam',
+        lastName: 'Appleby'
+      },
+      {
+        groupId: 1,
+        firstName: 'Anton',
+        lastName: 'Martinovic'
+      },
+      {
+        groupId: 1,
+        firstName: 'Wilson',
+        lastName: 'Holt'
+      },
+      {
+        groupId: 2,
+        firstName: 'Marine',
+        lastName: 'Sweet'
+      },
+      {
+        groupId: 2,
+        firstName: 'Georgette',
+        lastName: 'Kubo'
+      },
+      {
+        groupId: 3,
+        firstName: 'Aurora',
+        lastName: 'Hase'
+      },
+      {
+        groupId: 4,
+        firstName: 'Trenton',
+        lastName: 'Lesley'
+      },
+      {
+        groupId: 4,
+        firstName: 'Camila',
+        lastName: 'Nenci'
+      },
+      {
+        groupId: 5,
+        firstName: 'Rosemarie',
+        lastName: 'Affini'
+      },
+      {
+        groupId: 5,
+        firstName: 'Victoria',
+        lastName: 'Cremonesi'
+      },
+    ])
   },
 
   down: async (queryInterface, Sequelize) => {

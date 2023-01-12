@@ -3,31 +3,28 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Band extends Model {
+  class Instrument extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Band.hasMany(
-        models.Musician, {
-          foreignKey: 'groupId',
-          onDelete: 'CASCADE', 
-          hooks: true
-      });
-      Band.hasMany(models.Album, {foreignkey: 'bandId', onDelete: 'CASCADE', hooks: true})
+      Instrument.belongsToMany(
+        models.Musician, 
+        { through: models.MusicianInstrument }
+      );
     }
   };
-  Band.init({
-    name: {
+  Instrument.init({
+    type: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     }
   }, {
     sequelize,
-    modelName: 'Band',
+    modelName: 'Instrument',
   });
-  return Band;
+  return Instrument;
 };

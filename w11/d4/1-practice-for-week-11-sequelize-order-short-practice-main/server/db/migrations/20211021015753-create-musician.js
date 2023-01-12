@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      groupId: {
+      bandId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Bands' },

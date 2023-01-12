@@ -12,11 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Band.hasMany(
         models.Musician, {
-          foreignKey: 'groupId',
+          foreignKey: 'bandId', 
           onDelete: 'CASCADE', 
           hooks: true
       });
-      Band.hasMany(models.Album, {foreignkey: 'bandId', onDelete: 'CASCADE', hooks: true})
     }
   };
   Band.init({
