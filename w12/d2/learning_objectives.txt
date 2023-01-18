@@ -1,0 +1,4 @@
+Explain the mathematical formula used to determine the offset value when paginating query results
+Explain how to use query parameters to send an array of values
+Explain the basic process for handling an optional search filter
+Give a brief breakdown of the steps for benchmarking a query
