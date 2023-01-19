@@ -1,0 +1,5 @@
+Explain who enforces and who defines a CORS policy
+Explain the difference between a (bad) ambiguous CORS policy and a (good) specific CORS policy
+Explain an example of a CSRF attack
+Explain the strategy we employ to prevent CSRF attacks
+Explain an example of an XSS attack

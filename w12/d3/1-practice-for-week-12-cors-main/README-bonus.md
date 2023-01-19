@@ -11,7 +11,7 @@ __real-app/backend/app.js__ file.
 Comment in the very last CORS policy defined from lines 45-48 of the
 __real-app/backend/app.js__ file.
 
-This CORS policy is a specific policy on the server. The CORS
+This CORS policy is a specifice policy on the server. The CORS
 policy will set the `Access-Control-Allow-Origin` header to
 `"http://localhost:5001"` most of the time. However, if the origin of the URL is
 `"http://localhost:5002"`, then it will be set to `"http://localhost:5002"`.
