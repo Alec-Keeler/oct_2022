@@ -30,28 +30,39 @@ app.use(cors({
 
 /* ---------------------- Enable CSRF Protection --------------------- */
 
-// app.use(csurf({
-//   cookie: {
-//     sameSite: 'strict',
-//     secure: true,
-//     httpOnly: true
-//   }
-// }));
+app.use(csurf({
+  cookie: {
+    sameSite: 'strict',
+    secure: true,
+    httpOnly: true
+  }
+}));
 
 /* ------------------------ Frontend Files -------------------------- */
+const { Tweet } = require('./db/models')
+app.post('/', async (req, res) => {
+  // if (req.body.action === "delete") {
+  //   let tweets = await Tweet.findAll()
+  //   for (let i = 0; i < tweets.length; i++) {
+  //     const tweet = tweets[i];
+  //     await tweet.destroy()
+  //   }
+    res.send(':)')
+  // }
+})
 
 app.get('/', (req, res) => {
-  // res.cookie('XSRF-Token', req.csrfToken());
+  res.cookie('XSRF-Token', req.csrfToken());
   return res.sendFile(path.resolve(__dirname, "../frontend", "home.html"));
 });
 
 app.get('/login', (req, res) => {
-  // res.cookie('XSRF-Token', req.csrfToken());
+  res.cookie('XSRF-Token', req.csrfToken());
   return res.sendFile(path.resolve(__dirname, "../frontend", "login.html"));
 });
 
 app.get('/profile', (req, res) => {
-  // res.cookie('XSRF-Token', req.csrfToken());
+  res.cookie('XSRF-Token', req.csrfToken());
   return res.sendFile(path.resolve(__dirname, "../frontend", "profile.html"));
 });
 
