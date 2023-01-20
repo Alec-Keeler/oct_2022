@@ -1,0 +1,5 @@
+Explain the purpose of each section of a JWT
+Explain how a JWT's signature is formed
+What is the difference between Encryption, Encoding and Hashing
+Why do we use a Salt when Hashing?
+What is the difference between a user role and permission?
